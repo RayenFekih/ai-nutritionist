@@ -1,0 +1,47 @@
+{
+  "name": "chatbot",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "runArgs": [
+        "--name",
+        "chatbot_container" 
+  ],
+  "features": {
+    "ghcr.io/devcontainers-contrib/features/turborepo-npm:1": {},
+    "ghcr.io/devcontainers-contrib/features/typescript:2": {},
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12",
+      "toolsToInstall": [
+        "poetry"
+      ]
+    }
+  },
+  "customizations": {
+        "settings": {
+            "notebook.formatOnSave.enabled": true,
+            "[python]": {
+                "editor.formatOnSave": true,
+                "editor.codeActionsOnSave": {
+                    "source.fixAll": "explicit",
+                    "source.organizeImports": "explicit"
+                },
+                "editor.defaultFormatter": "charliermarsh.ruff"
+            }
+        },
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "yzhang.markdown-all-in-one",
+                "mutantdino.resourcemonitor",
+                "ms-toolsai.jupyter",
+                "ktnrg45.vscode-cython",
+                "tamasfe.even-better-toml",
+                "charliermarsh.ruff"
+            ]
+        }
+  },
+  "forwardPorts": [
+    3000,
+    8000
+  ],
+  "postCreateCommand": "poetry install"
+}
