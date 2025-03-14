@@ -7,7 +7,18 @@ class Settings(BaseSettings):
     )
 
     GROQ_API_KEY: str
+
     TEXT_MODEL_NAME: str = "llama-3.3-70b-versatile"
+    SMALL_TEXT_MODEL_NAME: str = "gemma2-9b-it"
+
+    # QDRant vector store
+    QDRANT_API_KEY: str | None
+    QDRANT_URL: str
+    QDRANT_PORT: str = "6333"
+    QDRANT_HOST: str | None = None
+    EMBEDDING_MODEL: str = "all-MiniLM-L6-v2"
+    COLLECTION_NAME: str = "long_term_memory"
+    SIMILARITY_THRESHOLD: float = 0.9  # Threshold for considering memories as similar
 
 
 settings = Settings()

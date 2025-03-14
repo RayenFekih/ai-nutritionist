@@ -2,4 +2,4 @@ from langgraph.graph import MessagesState
 
 
 class AINutritionistState(MessagesState):
-    pass
+    test_memory: str = "hi"

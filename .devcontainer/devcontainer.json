@@ -35,7 +35,8 @@
                 "ms-toolsai.jupyter",
                 "ktnrg45.vscode-cython",
                 "tamasfe.even-better-toml",
-                "charliermarsh.ruff"
+                "charliermarsh.ruff",
+                "PKief.material-icon-theme"
             ]
         }
   },
