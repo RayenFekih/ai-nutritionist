@@ -1,4 +1,5 @@
 from langchain_core.messages import AIMessage, HumanMessage
+from langchain_core.runnables import RunnableConfig
 
 from src.ai_nutritionist.graph.state import AINutritionistState
 from src.ai_nutritionist.graph.utils.chains import get_text_chat_chain
@@ -15,13 +16,14 @@ def memory_extraction_node(state: AINutritionistState):
     return {}
 
 
-def conversation_node(state: AINutritionistState):
+def conversation_node(state: AINutritionistState, config: RunnableConfig):
 
     chain = get_text_chat_chain()
 
     response = chain.invoke(
         {
             "messages": state["messages"],
-        }
+        },
+        config
     )
     return {"messages": AIMessage(content=response)}
