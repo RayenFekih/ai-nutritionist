@@ -20,5 +20,7 @@ class Settings(BaseSettings):
     COLLECTION_NAME: str = "long_term_memory"
     SIMILARITY_THRESHOLD: float = 0.9  # Threshold for considering memories as similar
 
+    MEMORY_TOP_K: int = 3
+
 
 settings = Settings()

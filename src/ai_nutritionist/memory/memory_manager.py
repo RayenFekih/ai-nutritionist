@@ -60,6 +60,17 @@ class MemoryManager:
                 },
             )
 
+    def get_relevant_memories(self, context: str) -> list[str]:
+        memories = self.vector_store.search_memories(
+            context, k=settings.MEMORY_TOP_K)
+
+        return [memory.text for memory in memories]
+
+    def format_memories_for_prompt(self, memories: list[str]) -> str:
+        if not memories:
+            return ""
+        return "\n".join(f"- {memory}" for memory in memories)
+
 
 def get_memory_manager() -> MemoryManager:
     """Get a MemoryManager instance."""
