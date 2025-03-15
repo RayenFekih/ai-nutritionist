@@ -8,9 +8,14 @@ from src.ai_nutritionist.graph.utils.helpers import (
 from src.ai_nutritionist.prompts import CHARACTER_PROMPT
 
 
-def get_text_chat_chain():
+def get_text_chat_chain(summary: str = ""):
     model = get_chat_model()
     system_message = CHARACTER_PROMPT
+
+    if summary:
+        system_message += (
+            f"\n\nSummary of conversation earlier between Nour and the user: {summary}"
+        )
 
     prompt = ChatPromptTemplate.from_messages(
         [

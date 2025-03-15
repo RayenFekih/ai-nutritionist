@@ -21,6 +21,8 @@ class Settings(BaseSettings):
     SIMILARITY_THRESHOLD: float = 0.9  # Threshold for considering memories as similar
 
     MEMORY_TOP_K: int = 3
+    TOTAL_MESSAGES_AFTER_SUMMARY: int = 3
+    TOTAL_MESSAGES_SUMMARY_TRIGGER: int = 20
 
 
 settings = Settings()
