@@ -27,7 +27,19 @@ class Memory(BaseModel):
 
 
 class VectorStore:
-    """"A singleton class to handle vector storage operations using Qdrant."""
+    """
+    A singleton class for managing a vector store using Qdrant for memory storage and retrieval.
+
+    Attributes:
+        EMBEDDING_MODEL (str): The model used for generating embeddings.
+        COLLECTION_NAME (str): The name of the collection in the vector store.
+        SIMILARITY_THRESHOLD (float): The threshold for determining similarity between memories.
+
+    Methods:
+        search_memories(query, k=5): Searches for memories similar to the query.
+        find_similar_memory(text): Finds a memory similar to the given text.
+        store_memory(text, metadata): Stores a new memory or updates an existing one.
+    """
 
     # Class parameters
     EMBEDDING_MODEL = settings.EMBEDDING_MODEL
@@ -53,10 +65,22 @@ class VectorStore:
             self._initialized = True
 
     def _collection_exists(self) -> bool:
+        """
+        Check if the collection with the specified name exists in the client's collections.
+
+        Returns:
+            bool: True if the collection exists, False otherwise.
+        """
         collections = self.client.get_collections().collections
         return any(col.name == self.COLLECTION_NAME for col in collections)
 
     def _create_collection(self) -> None:
+        """
+        Creates a new collection in the vector store.
+
+        Raises:
+            Any exceptions raised by the client.create_collection method.
+        """
         sample_embedding = self.model.encode("sample text")
         self.client.create_collection(
             collection_name=self.COLLECTION_NAME,
@@ -67,6 +91,16 @@ class VectorStore:
         )
 
     def search_memories(self, query: str, k: int = 5) -> list[Memory]:
+        """
+        Search for memories in the vector store that are similar to the given query.
+
+        Args:
+            query (str): The search query to find similar memories.
+            k (int, optional): The maximum number of similar memories to return. Defaults to 5.
+
+        Returns:
+            list[Memory]: A list of Memory objects that are similar to the query.
+        """
 
         if not self._collection_exists():
             return []
@@ -90,6 +124,17 @@ class VectorStore:
         ]
 
     def find_similar_memory(self, text: str) -> Memory | None:
+        """
+        Find a memory in the vector store that is most similar to the given text.
+
+        Args:
+            text (str): The text to compare against stored memories.
+
+        Returns:
+            Memory | None: The most similar Memory object if its similarity score 
+            meets or exceeds the defined threshold, otherwise None.
+        """
+
         results = self.search_memories(text, k=1)
         if results:
             self.logger.debug(
@@ -99,6 +144,22 @@ class VectorStore:
         return None
 
     def store_memory(self, text: str, metadata: dict) -> None:
+        """
+        Store a memory in the vector store with the given text and metadata.
+
+        If the memory collection does not exist, it creates a new one. It checks
+        for similar existing memories and updates the metadata with the same ID
+        if a similar memory is found. The text is encoded into an embedding and
+        stored as a point in the vector store.
+
+        Args:
+            text (str): The text to be stored as a memory.
+            metadata (dict): Additional metadata to associate with the memory.
+
+        Raises:
+            Any exceptions raised by the client.upsert method.
+        """
+
         if not self._collection_exists():
             self.logger.info(
                 "Memory collection not found. Creating a new collection.")

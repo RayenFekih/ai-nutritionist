@@ -37,7 +37,8 @@
               "tamasfe.even-better-toml",
               "charliermarsh.ruff",
               "PKief.material-icon-theme",
-              "GitHub.copilot"
+              "GitHub.copilot",
+              "Codium.codium"
             ]
         }
   },
