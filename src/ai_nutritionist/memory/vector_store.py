@@ -7,7 +7,7 @@ from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, PointStruct, VectorParams
 from sentence_transformers import SentenceTransformer
 
-from src.ai_nutritionist.settings import settings
+from ai_nutritionist.settings import settings
 
 
 class Memory(BaseModel):

@@ -3,7 +3,7 @@ import re
 from langchain_core.output_parsers import StrOutputParser
 from langchain_groq import ChatGroq
 
-from src.ai_nutritionist.settings import settings
+from ai_nutritionist.settings import settings
 
 
 def get_chat_model(temperature: float = 0.7):

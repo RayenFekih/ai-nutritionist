@@ -1,4 +1,4 @@
-from src.ai_nutritionist.graph.graph import graph
+from ai_nutritionist.graph.graph import graph
 
 
 def stream_graph_updates(user_input: str):
