@@ -2,7 +2,7 @@ import logging
 import logging.config
 import os
 
-from src.ai_nutritionist.settings import settings
+from ai_nutritionist.settings import settings
 
 os.makedirs(settings.ERROR_LOGGING_PATH, exist_ok=True)
 error_log_file_path = os.path.join(settings.ERROR_LOGGING_PATH, "logs")

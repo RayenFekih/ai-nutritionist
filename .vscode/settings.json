@@ -1,12 +1,5 @@
 {
-	"files.watcherExclude": {
-		"**/target": true
-	},
-	"files.associations": {
-		"*.json": "json"
-	},
 	"editor.formatOnSave": true,
-	"editor.defaultFormatter": "charliermarsh.ruff",
 	"editor.codeActionsOnSave": {
 		"source.organizeImports": "explicit"
 	},
@@ -16,7 +9,10 @@
 	],
 	"python.testing.unittestEnabled": false,
 	"python.testing.pytestEnabled": true,
-	"autoDocstring.docstringFormat": "google",
-	"autoDocstring.generateDocstringOnEnter": true,
-	"autoDocstring.guessTypes": true,
+	"terminal.integrated.env.linux": {
+		"PYTHONPATH": "${workspaceFolder}/src"
+	},
+	"python.analysis.extraPaths": [
+		"./src"
+	]
 }

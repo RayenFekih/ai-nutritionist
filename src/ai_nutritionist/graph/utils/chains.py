@@ -1,11 +1,11 @@
 
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
-from src.ai_nutritionist.graph.utils.helpers import (
+from ai_nutritionist.graph.utils.helpers import (
     AsteriskRemovalParser,
     get_chat_model,
 )
-from src.ai_nutritionist.prompts import CHARACTER_PROMPT
+from ai_nutritionist.prompts import CHARACTER_PROMPT
 
 
 def get_text_chat_chain(summary: str = ""):

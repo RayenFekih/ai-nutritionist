@@ -1,11 +1,11 @@
 from langchain_core.messages import AIMessage, HumanMessage, RemoveMessage
 from langchain_core.runnables import RunnableConfig
 
-from src.ai_nutritionist.graph.state import AINutritionistState
-from src.ai_nutritionist.graph.utils.chains import get_text_chat_chain
-from src.ai_nutritionist.graph.utils.helpers import get_chat_model
-from src.ai_nutritionist.memory.memory_manager import get_memory_manager
-from src.ai_nutritionist.settings import settings
+from ai_nutritionist.graph.state import AINutritionistState
+from ai_nutritionist.graph.utils.chains import get_text_chat_chain
+from ai_nutritionist.graph.utils.helpers import get_chat_model
+from ai_nutritionist.memory.memory_manager import get_memory_manager
+from ai_nutritionist.settings import settings
 
 
 def memory_extraction_node(state: AINutritionistState):

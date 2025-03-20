@@ -3,8 +3,8 @@ from typing import Literal
 
 from langgraph.graph import END
 
-from src.ai_nutritionist.graph.state import AINutritionistState
-from src.ai_nutritionist.settings import settings
+from ai_nutritionist.graph.state import AINutritionistState
+from ai_nutritionist.settings import settings
 
 logging.getLogger(__name__)
 logger = logging.getLogger(__name__)
