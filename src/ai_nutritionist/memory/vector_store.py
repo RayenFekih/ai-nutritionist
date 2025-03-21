@@ -185,6 +185,26 @@ class VectorStore:
             points=[point],
         )
 
+    def get_all_memories(self) -> list[str]:
+        """
+        Retrieve all memory entries from the specified Qdrant collection.
+
+        Returns:
+            list[str]: A list of memory texts retrieved from the collection.
+        """
+
+        points = self.client.scroll(
+            collection_name=self.COLLECTION_NAME,
+            limit=settings.TOTAL_MESSAGES_SUMMARY_TRIGGER,
+            with_payload=True,
+            with_vectors=False,
+        )
+
+        memories = [points[0][i].payload["text"]
+                    for i in range(len(points[0]))]
+
+        return memories
+
 
 def get_vector_store() -> VectorStore:
     """Get or create the VectorStore singleton instance."""
