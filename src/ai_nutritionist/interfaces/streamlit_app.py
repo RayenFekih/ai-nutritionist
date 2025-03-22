@@ -1,7 +1,7 @@
 import streamlit as st
 
 from ai_nutritionist.graph.graph import graph
-from ai_nutritionist.interfaces import get_memories, typewriter_effect
+from ai_nutritionist.interfaces import delete_memory, get_memories, typewriter_effect
 
 if "memories" not in st.session_state:
     st.session_state.memories = get_memories()
@@ -9,16 +9,25 @@ if "memories" not in st.session_state:
 with st.sidebar:
     thread_id = st.text_input(
         ":grey-background[Chat Session Name]", value="001", key="thread_id")
+
     st.title("Memories")
 
-    # Display stored memories
-    for memory in st.session_state.memories:
-        st.markdown(f"- {memory}")
+    # Display stored memories with Delete buttons
+    for memory_id, memory_text in st.session_state.memories.items():
+        col1, col2 = st.columns([0.85, 0.15])  # Layout: Memory + Delete
+
+        with col1:
+            st.markdown(f"- {memory_text}")
+
+        with col2:
+            if st.button("🗑️", key=f"delete_{memory_id}"):
+                delete_memory(memory_id)
 
     # Refresh button
     if st.button("Refresh Memories"):
         st.session_state.memories = get_memories()
         st.rerun()
+
 
 st.title("Nutritionist Chatbot 🍎💬")
 st.caption("This chatbot is under developement")
