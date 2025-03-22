@@ -4,7 +4,7 @@ from typing import Optional
 
 from pydantic import BaseModel
 from qdrant_client import QdrantClient
-from qdrant_client.models import Distance, PointStruct, VectorParams
+from qdrant_client.models import Distance, PointIdsList, PointStruct, VectorParams
 from sentence_transformers import SentenceTransformer
 
 from ai_nutritionist.settings import settings
@@ -193,17 +193,17 @@ class VectorStore:
             list[str]: A list of memory texts retrieved from the collection.
         """
 
-        points = self.client.scroll(
-            collection_name=self.COLLECTION_NAME,
-            limit=settings.TOTAL_MESSAGES_SUMMARY_TRIGGER,
-            with_payload=True,
-            with_vectors=False,
-        )
+        all_points = self.client.scroll(collection_name=self.COLLECTION_NAME)
 
-        memories = [points[0][i].payload["text"]
-                    for i in range(len(points[0]))]
+        memories = {point.id: point.payload["text"] for point in all_points[0]}
 
         return memories
+
+    def delete_memory(self, memory_id: str | int) -> None:
+        self.client.delete(
+            collection_name=self.COLLECTION_NAME,
+            points_selector=PointIdsList(points=[memory_id])
+        )
 
 
 def get_vector_store() -> VectorStore:
