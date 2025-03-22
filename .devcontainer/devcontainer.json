@@ -38,7 +38,8 @@
               "charliermarsh.ruff",
               "PKief.material-icon-theme",
               "GitHub.copilot",
-              "Codium.codium"
+              "Codium.codium",
+              "ms-vscode.makefile-tools"
             ]
         }
   },
