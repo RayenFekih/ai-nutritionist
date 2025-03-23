@@ -6,6 +6,7 @@ clean: # clean dependencies and coverage report
 
 install: # install dependencies in the devcontainer
 	@echo ">> installing dependencies"
+	@poetry lock
 	@poetry install
 
 test: # run the unit tests
