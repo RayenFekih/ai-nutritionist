@@ -19,7 +19,7 @@ coverage: # generates test coverage report
 
 run-ui: # run the streamlit chatbot app
 	@echo ">> running the Streamlit app"
-	@streamlit run ${APP_PATH}/streamlit_app.py
+	@streamlit run ${APP_PATH}/streamlit/streamlit_app.py
 
 run-graph: #run the langgraph studio to interact with graph
 	@echo ">> running the langgraph studio app"
