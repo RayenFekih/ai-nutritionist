@@ -1,5 +1,4 @@
 import streamlit as st
-
 from ai_nutritionist.graph.graph import graph
 from ai_nutritionist.interfaces import delete_memory, get_memories, typewriter_effect
 

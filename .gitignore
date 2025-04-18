@@ -174,4 +174,7 @@ cython_debug/
 
 # Logging
 logs/
+
+# Extensions
 .qodo
+.langgraph_api
